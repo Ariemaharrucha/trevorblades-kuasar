@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview"
   },
+  "proxy": "https://integrate.api.nvidia.com/v1",
   "dependencies": {
     "@apollo/client": "^3.12.8",
     "@radix-ui/react-slot": "^1.1.1",
