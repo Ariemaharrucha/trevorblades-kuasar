@@ -18,7 +18,7 @@ type TCardProps = {
 
 export const CardCountry:React.FC<TCardProps> = (props) => {
   return (
-    <Card className="col-span-1 border-violet-400 border-4 flex flex-col overflow-hidden bg-purple-100/10">
+    <Card className="col-span-4 md:col-span-2 lg:col-span-1 border-violet-400 border-4 flex flex-col overflow-hidden bg-purple-100/10">
       <CardHeader>
         <CardTitle className="text-3xl text-center ">{props.name}</CardTitle>
         <CardTitle className="text-3xl text-center">{props.emoji}</CardTitle>

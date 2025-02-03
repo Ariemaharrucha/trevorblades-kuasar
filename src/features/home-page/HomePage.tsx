@@ -27,14 +27,14 @@ export const HomePage = () => {
       <div className="container mx-auto min-h-screen">
       {loading || error ? (
           <div className="flex items-center justify-center h-[50vh]">
-            <p className="text-lg  text-violet-700  p-4 rounded-lg shadow-md">
+            <div className="text-lg  text-violet-700  p-4 rounded-lg shadow-md">
               {error ? `❌ ${error.message}` : (
                 <div className="flex gap-2">
                   <span className="animate-spin"><Loader></Loader></span>
                   Loading...
                 </div>
             )}
-            </p>
+            </div>
           </div>
         ) : (
           <div className="mt-2 mx-2 grid grid-cols-4 gap-4">
