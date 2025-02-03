@@ -18,6 +18,7 @@ export const GET_COUNTRY_DETAIL = gql`
       code
       name
       emoji
+      currency
       languages {
         code
         name
@@ -26,6 +27,7 @@ export const GET_COUNTRY_DETAIL = gql`
       continent {
         code
         countries {
+          emoji
           name
         }
         name
