@@ -45,6 +45,7 @@ export const HomePage = () => {
                 emoji={country.emoji}
                 capital={country.capital}
                 currency={country.currency}
+                code={country.code}
               />
             ))}
           </div>

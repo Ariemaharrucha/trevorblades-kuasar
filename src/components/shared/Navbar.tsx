@@ -13,7 +13,7 @@ export const Navbar = () => {
 
   return (
     <header className="bg-white sticky top-0 w-full z-10 border-b-4 border-violet-600">
-      <nav className="flex justify-between items-center py-4 px-4 md:px-8 container mx-auto">
+      <nav className="flex justify-between items-center py-3 px-4 md:px-8 container mx-auto">
         {/* Logo */}
         <div>
           <span className="font-bold text-xl md:text-2xl text-violet-700 cursor-pointer">
