@@ -1,3 +1,4 @@
+import { Login } from "@/features/auth/login-page/Login"
 import { ChatPage } from "@/features/chat-ai-page/ChatPage"
 import { DetailPage } from "@/features/detail-page/DetailPage"
 import { HomePage } from "@/features/home-page/HomePage"
@@ -10,6 +11,7 @@ export const AppRouter = () => {
         <Route path="/" element={<HomePage/>} />
         <Route path="/detail/:code" element={<DetailPage/>} />
         <Route path="/chat-ai" element={<ChatPage/>} />
+        <Route path="/login" element={<Login/>} />
       </Routes>
     </BrowserRouter>
   )
