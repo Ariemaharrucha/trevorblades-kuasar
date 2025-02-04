@@ -1,37 +1,13 @@
 import { Navbar } from "@/components/shared/Navbar";
 import { CardCountry } from "./components/CardCountry";
-import { GET_COUNTRIES } from "@/querry/querry";
-import { useQuery } from "@apollo/client";
-import useCountry, { IOptionsCountry } from "@/store/useStore";
-import { useEffect, useState } from "react";
 import { ICountry } from "@/types/country";
 import { Loader } from "lucide-react";
 import Select from "react-select";
 import hero from "../../assets/map.png";
+import { useHomePage } from "./hooks/useHomePage";
 
 export const HomePage = () => {
-  const { data, loading, error } = useQuery(GET_COUNTRIES);
-  const { countries, setCountries } = useCountry();
-  const [search, setSearch] = useState<IOptionsCountry | null >(null);
-  const [filter, setFilter] = useState([]);
-
-  useEffect(() => {
-    if (data && data.countries) {
-      const formattedCountries = data.countries.map((country: ICountry) => ({
-        label: `${country.emoji} ${country.name}`,
-        value: country.name,
-      }));
-      setCountries(formattedCountries);
-    }
-  }, [data, setCountries]);
-
-  useEffect(() => {
-    const filterCountry = search
-      ? data?.countries.filter((country: ICountry) => country.name === search.value)
-      : data?.countries || [];
-  
-    setFilter(filterCountry);
-  }, [data?.countries, search]);
+  const {countries, search, setSearch, loading, error, filter} = useHomePage();
   
   return (
     <div>
@@ -84,6 +60,7 @@ export const HomePage = () => {
               </p>
               <Select      
                 options={countries}
+                value={search}
                 onChange={setSearch}
                 placeholder="Search country..."
               />

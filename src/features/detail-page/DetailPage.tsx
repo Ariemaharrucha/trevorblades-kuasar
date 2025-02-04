@@ -1,18 +1,10 @@
 import { Navbar } from "@/components/shared/Navbar";
-import { GET_COUNTRY_DETAIL } from "@/querry/querry";
-import { IDetailCountry } from "@/types/detail.country";
-import { useQuery } from "@apollo/client";
 import { Loader } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useDetailPage } from "./hooks/useDetailPage";
 
 export const DetailPage = () => {
-  const { code } = useParams();
-  const { loading, error, data } = useQuery(GET_COUNTRY_DETAIL, {
-    variables: { code: code },
-    skip: !code,
-  });
-
-  const country = data?.country as IDetailCountry;
+  const {loading, error, country} = useDetailPage();
 
   return (
     <div>
