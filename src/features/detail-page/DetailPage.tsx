@@ -11,7 +11,7 @@ export const DetailPage = () => {
       <Navbar />
       <section className="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
         <Link
-          to={"/"}
+          to={"/trevo"}
           className="bg-violet-600 text-white font-semibold px-3 py-2 rounded-md"
         >
           Back

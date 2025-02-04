@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import supabase from "@/lib/supabaseClient";
+import { Auth } from "@supabase/auth-ui-react";
+import { ThemeSupa } from "@supabase/auth-ui-shared";
 
 export const Login = () => {
   return (
@@ -18,25 +18,12 @@ export const Login = () => {
               </h2>
             </section>
             <div className="space-y-3">
-              <div>
-                <Label className="font-medium text-lg ">Username</Label>
-                <Input placeholder="Username"></Input>
-              </div>
-              <div>
-                <Label className="font-medium text-lg ">Password</Label>
-                <Input placeholder="Password"></Input>
-              </div>
-              <div>
-                <Button className="bg-white px-8 w-full" variant={"outline"}>
-                  Login
-                </Button>
-              </div>
-              <p className="text-center">Or</p>
-              <div>
-                <Button className="bg-white px-8 w-full" variant={"outline"}>
-                  Google
-                </Button>
-              </div>
+              <Auth
+                supabaseClient={supabase}
+                appearance={{ theme: ThemeSupa }}
+                providers={["google"]}
+                redirectTo="http://localhost:5173/trevo"
+              ></Auth>
             </div>
           </section>
         </div>

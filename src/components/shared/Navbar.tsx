@@ -23,8 +23,8 @@ export const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className=" hidden md:flex gap-8 items-center">
-          <Nav to="/">Home</Nav>
-          <Nav to="/chat-ai">Chat-AI</Nav>
+          <Nav to="/trevo">Home</Nav>
+          <Nav to="/trevo/chat-ai">Chat-AI</Nav>
         </div>
 
         {/* user profile */}
@@ -41,8 +41,8 @@ export const Navbar = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
           <div className="flex flex-col items-center bg-white py-4 space-y-3 md:hidden text-lg">
-            <Nav to="/">Home</Nav>
-            <Nav to="/chat-ai">Chat-AI</Nav>
+            <Nav to="/trevo">Home</Nav>
+            <Nav to="/trevo/chat-ai">Chat-AI</Nav>
           </div>
         )}
     </header>

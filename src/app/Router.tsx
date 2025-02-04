@@ -8,9 +8,9 @@ export const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage/>} />
-        <Route path="/detail/:code" element={<DetailPage/>} />
-        <Route path="/chat-ai" element={<ChatPage/>} />
+        <Route path="/trevo" element={<HomePage/>} />
+        <Route path="/trevo/detail/:code" element={<DetailPage/>} />
+        <Route path="/trevo/chat-ai" element={<ChatPage/>} />
         <Route path="/login" element={<Login/>} />
       </Routes>
     </BrowserRouter>

@@ -32,7 +32,7 @@ export const CardCountry: React.FC<TCardProps> = (props) => {
         </p>
       </CardContent>
       <CardFooter className="">
-        <Link to={`/detail/${props.code}`} className="w-full text-center py-2 border-none block bg-violet-500 hover:bg-violet-600 text-white font-semibold text-lg rounded-md">
+        <Link to={`/trevo/detail/${props.code}`} className="w-full text-center py-2 border-none block bg-violet-500 hover:bg-violet-600 text-white font-semibold text-lg rounded-md">
             Detail
         </Link>
       </CardFooter>
