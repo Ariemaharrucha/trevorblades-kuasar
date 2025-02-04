@@ -2,14 +2,19 @@ import { Navbar } from "@/components/shared/Navbar"
 import { CardCountry } from "./components/CardCountry"
 import { GET_COUNTRIES } from "@/querry/querry"
 import { useQuery } from "@apollo/client";
-import useCountry from "@/store/useStore";
-import { useEffect } from "react";
+import useCountry, { IOptionsCountry } from "@/store/useStore";
+import { useEffect, useState } from "react";
 import { ICountry } from "@/types/country";
 import { Loader } from "lucide-react";
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 
 export const HomePage = () => {
   const { data, loading, error } = useQuery(GET_COUNTRIES);
-  const {  setCountries } = useCountry();
+  const { countries, setCountries } = useCountry();
+  const animatedComponents = makeAnimated();
+  const [search, setSearch] = useState<IOptionsCountry[]>([])
+  const [filter, setFilter] = useState([])
 
   useEffect(() => {
     if (data && data.countries) {
@@ -20,6 +25,15 @@ export const HomePage = () => {
       setCountries(formattedCountries);
     }
   }, [data, setCountries]);
+
+  useEffect(()=>{
+    const filterCountry = search.length > 0 
+    ? data?.countries.filter((country: ICountry) =>
+        search.some((selected) => selected.value === country.name)
+      )
+    : data?.countries;
+    setFilter(filterCountry)
+  }, [data?.countries, search] )
 
   return (
     <div>
@@ -37,17 +51,30 @@ export const HomePage = () => {
             </div>
           </div>
         ) : (
-          <div className="mt-2 mx-2 grid grid-cols-4 gap-4">
-            {data?.countries.map((country: ICountry) => (
-              <CardCountry
-                key={country.code}
-                name={country.name}
-                emoji={country.emoji}
-                capital={country.capital}
-                currency={country.currency}
-                code={country.code}
+          <div className="mt-2">
+
+            <div className="my-4 max-w-xl mx-auto">
+            <Select
+                closeMenuOnSelect={false}
+                components={animatedComponents}
+                isMulti
+                options={countries}
+                onChange={(selected) => setSearch([...selected] as IOptionsCountry[])}
+                placeholder="Search country..."
               />
-            ))}
+            </div>
+            <div className="mt-2 mx-2 grid grid-cols-4 gap-4">
+              {filter?.map((country: ICountry) => (
+                <CardCountry
+                  key={country.code}
+                  name={country.name}
+                  emoji={country.emoji}
+                  capital={country.capital}
+                  currency={country.currency}
+                  code={country.code}
+                />
+              ))}
+            </div>
           </div>
         )}
       </div>
