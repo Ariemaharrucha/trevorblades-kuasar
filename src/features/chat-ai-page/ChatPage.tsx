@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { MoveDownIcon, MoveUpIcon, Send } from "lucide-react";
 import { ActionButton } from "./components/ActionButton";
 import { useChatPage } from "./hooks/useChatPage";
+import { Dot } from 'lucide-react'
 
 export const ChatPage = () => {
   const {countries, selectedCountry, setSelectedCountry, input, setInput, loading, messages, sendToAi, scrollToTop, scrollToBottom, chatContainerRef} = useChatPage();
@@ -31,7 +32,11 @@ export const ChatPage = () => {
           {messages.map((msg, index) => (
             <ChatBubble key={index} role={msg.role} content={msg.content} />
           ))}
-          {loading && <ChatBubble role="assistant" content="AI is typing.." />}
+          {loading && (<div className="w-24 p-3 border-none flex rounded-r-xl rounded-bl-xl bg-gray-100">
+              <span className="animate-bounce transition-all delay-75"><Dot size={26}/></span>
+              <span className="animate-bounce transition-all delay-100"><Dot size={26}/></span>
+              <span className="animate-bounce transition-all delay-150"><Dot size={26}/></span>
+          </div>)}
           <div></div>
         </div>
 
