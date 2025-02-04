@@ -41,7 +41,7 @@ export const DetailPage = () => {
           </div>
         ) : (
           <div>
-            <h1 className="text-4xl font-bold text-center mb-6">
+            <h1 className="text-4xl font-bold text-center mb-6 mt-4">
               {country.emoji} {country.name}
             </h1>
 

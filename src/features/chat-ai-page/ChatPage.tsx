@@ -58,7 +58,9 @@ export const ChatPage = () => {
 
   return (
     <div className="h-screen">
+      <div>
       <Navbar />
+      </div>
       <section className="max-w-4xl mx-auto p-6 bg-white border flex flex-col h-full ">
         <Select
           options={countries}
