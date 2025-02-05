@@ -10,7 +10,6 @@ export const Login = () => {
         supabaseClient={supabase}
         appearance={{ theme: ThemeSupa }}
         providers={["google"]}
-        redirectTo="http://localhost:5173/trevo"
       ></Auth>
     </AuthLayout>
   );
