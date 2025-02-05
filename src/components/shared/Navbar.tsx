@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { UserRound } from "lucide-react";
+import { Button } from "../ui/button";
+import supabase from "@/lib/supabaseClient";
 
 type NavProps = {
   to: string;
@@ -10,6 +12,16 @@ type NavProps = {
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error("Logout error:", error.message);
+    } else {
+      navigate("/login");
+    }
+  };
 
   return (
     <header className="bg-white sticky top-0 w-full z-10 border-b-4 border-violet-600">
@@ -31,6 +43,7 @@ export const Navbar = () => {
         <div className="flex-1 md:flex-grow-0 justify-end flex gap-4 items-center text-violet-700 me-2">
           <span className="text-lg font-semibold">Arie</span>
           <UserRound size={40} className="border-2 rounded-full"/>
+          <Button onClick={handleLogout}>Logout</Button>
         </div>
 
         <div className="md:hidden">
