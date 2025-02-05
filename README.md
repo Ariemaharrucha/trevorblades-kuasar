@@ -59,8 +59,9 @@ To set up TrevoBlades locally, follow the steps below:
 3. **Interactive AI Chat**:
    - Users can ask questions, get travel recommendations, and translate information related to the selected country.
 
-4. **Real-Time Response**:
-   - Responses are dynamically displayed using OpenAI's chat completion API.
+4. **Real-Time Response with NVIDIA Llama**:
+   - TrevoBlades leverages the power of NVIDIA's `llama-3_1-405b-instruct` model for generating accurate and context-aware responses.
+.
 
 5. **AI Typing Indicator**:
    - Displays a loading message while the AI is processing the request.
