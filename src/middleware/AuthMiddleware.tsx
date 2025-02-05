@@ -1,15 +1,22 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import supabase from "@/lib/supabaseClient";
+import { useProfile } from "@/store/useStore";
+import { IProfile } from "@/types/profile";
 
 export const AuthMiddleware = () => {
   const navigate = useNavigate();
+  const { setUserProfile, resetUserProfile } = useProfile();
 
   useEffect(() => {
     const checkSession = async () => {
       const { data } = await supabase.auth.getSession();
       if (!data.session) {
+        resetUserProfile();
         navigate("/login", { replace: true });
+      } else {
+        const user = data.session.user;
+        setUserProfile(user.user_metadata as IProfile);
       }
     };
 
@@ -24,7 +31,7 @@ export const AuthMiddleware = () => {
     return () => {
       subscription?.unsubscribe();
     };
-  }, [navigate]);
+  }, [navigate, resetUserProfile, setUserProfile]);
 
   return <Outlet />;
 };

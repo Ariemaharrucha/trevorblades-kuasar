@@ -1,8 +1,9 @@
 import { GET_COUNTRIES } from '@/querry/querry';
-import useCountry, { IOptionsCountry } from '@/store/useStore';
 import { ICountry } from '@/types/country';
 import { useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
+import { useCountry } from '@/store/useStore';
+import { IOptionsCountry } from '@/types/reactSelect';
 
 export const  useHomePage = () => {
     const { data, loading, error } = useQuery(GET_COUNTRIES);

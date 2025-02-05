@@ -1,7 +1,8 @@
-import useCountry, { IOptionsCountry } from "@/store/useStore";
 import { useRef, useState } from "react";
 import { getInfoCountry } from "../api/api";
 import { IMesssages } from "@/types/messages";
+import { useCountry } from "@/store/useStore";
+import { IOptionsCountry } from "@/types/reactSelect";
 
 export const useChatPage = () => {
     const { countries } = useCountry();
