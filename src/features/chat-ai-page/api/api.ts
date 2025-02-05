@@ -78,5 +78,6 @@ export const getInfoCountry = async (
       return response.choices[0].message.content?.replace(/\\n/g, "\n");
     } catch (error) {
       console.log(error);
+      return 'Maaf, saya mengalami kesalahan saat memproses permintaan Anda. Silakan coba lagi nanti.'
     }
   };
