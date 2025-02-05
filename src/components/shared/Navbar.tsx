@@ -1,15 +1,25 @@
 import React, { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { LogOut, Menu, User } from "lucide-react";
+import { Menu } from "lucide-react";
 import supabase from "@/lib/supabaseClient";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
-  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useProfile } from "@/store/useStore";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 type NavProps = {
   to: string;
@@ -18,7 +28,6 @@ type NavProps = {
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
 
   return (
     <header className="bg-white sticky top-0 w-full z-10 border-b-4 border-violet-600">
@@ -38,7 +47,7 @@ export const Navbar = () => {
 
         {/* user profile */}
         <div className="flex-1 md:flex-grow-0 justify-end flex gap-4 items-center text-violet-700 me-2">
-          <DropDownMenu/>
+          <DropDownMenu />
         </div>
 
         <div className="md:hidden">
@@ -77,8 +86,38 @@ const Nav: React.FC<NavProps> = ({ to, children }) => {
 };
 
 const DropDownMenu = () => {
+  const { userProfile } = useProfile();
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <div className="size-10  rounded-full overflow-hidden cursor-pointer">
+          <img
+            src={userProfile?.avatar_url}
+            alt="foto profile"
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuGroup className="space-y-2">
+          <div className="flex gap-2 ps-2 items-centercursor-pointer">
+            {/* <User /> */}
+            <Link to={"/trevo/profile"}>Profile</Link>
+          </div>
+          <div className="flex gap-2 ps-2 item-center cursor-pointer">
+          {/* <LogOut /> */}
+          <LogOutButton/>
+          </div>
+        </DropdownMenuGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
+
+const LogOutButton = () => {
   const navigate = useNavigate();
-  const {userProfile} = useProfile();
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -88,26 +127,24 @@ const DropDownMenu = () => {
       navigate("/login");
     }
   };
-
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-          <div className="size-10  rounded-full overflow-hidden cursor-pointer">
-            <img src={userProfile?.avatar_url} alt="foto profile" className="w-full h-full object-cover" loading="lazy" />
-          </div>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <User />
-            <Link to={'/trevo/profile'}>Profile</Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={handleLogout}>
-            <LogOut />
-            <span>Logout</span>
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
-};
+    <AlertDialog>
+    <AlertDialogTrigger asChild>
+      <p>Logout</p>
+    </AlertDialogTrigger>
+    <AlertDialogContent>
+      <AlertDialogHeader>
+        <AlertDialogTitle>Are you Logout?</AlertDialogTitle>
+        <AlertDialogDescription>
+        </AlertDialogDescription>
+      </AlertDialogHeader>
+      <AlertDialogFooter>
+        <AlertDialogCancel>Cancel</AlertDialogCancel>
+        <AlertDialogAction onClick={handleLogout}>
+          yes
+        </AlertDialogAction>
+      </AlertDialogFooter>
+    </AlertDialogContent>
+  </AlertDialog>
+  )
+}
