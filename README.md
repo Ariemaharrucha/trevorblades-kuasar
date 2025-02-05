@@ -1,50 +1,114 @@
-# React + TypeScript + Vite
+# TrevoBlades
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TrevoBlades is a responsive React application that provides users with country-specific information, travel recommendations, and translation features. The application integrates OpenAI's language model to deliver an AI-driven experience for geographical and travel-related inquiries.
 
-Currently, two official plugins are available:
+## Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+TrevoBlades allows users to:
+- **Ask questions** about specific countries.
+- **Get travel recommendations** for selected countries.
+- **Translate country-specific information** into a user-friendly format.
 
-## Expanding the ESLint configuration
+The app uses a dynamic dropdown for country selection, React for its UI, and OpenAI's API to generate meaningful and engaging responses.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## Setup Instructions
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+To set up TrevoBlades locally, follow the steps below:
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/Ariemaharrucha/trevorblades-kuasar.git
+    cd trevoblades
+    ```
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+2. **Install dependencies**:
+    ```bash
+    pnpm install
+    ```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+3. **Configure the environment variables**:
+    - Create a `.env` file in the root directory.
+    - Add the following variables:
+      ```env
+        VITE_NVDIA_API_KEY=api_key_nvdia
+        VITE_PROJECT_URL=public_url_supabase
+        VITE_SUPABASE_API_KEY=apikey_supabase
+        VITE_TREVOBLADES_API=TREVOBLADES_uri
+      ```
+
+4. **Run the development server**:
+    ```bash
+    pnpm run dev
+    ```
+
+5. **Access the application**:
+    - Open your browser and navigate to `http://localhost:5173`.
+
+---
+
+## Available Features
+
+1. **OAuth Integration**:
+   - Secure user authentication using Supabase.
+
+2. **Display Country Selection**:
+   - Displays the selected country's name, flag, currency, and other detailed information.
+
+3. **Interactive AI Chat**:
+   - Users can ask questions, get travel recommendations, and translate information related to the selected country.
+
+4. **Real-Time Response**:
+   - Responses are dynamically displayed using OpenAI's chat completion API.
+
+5. **AI Typing Indicator**:
+   - Displays a loading message while the AI is processing the request.
+
+6. **Message**:
+   - All interactions are displayed in a chat-like interface.
+
+7. **Country Validation**:
+   - Action buttons are enabled only after selecting a country.
+
+---
+
+## Technical Decisions and Architecture
+
+1. **Tech Stack**:
+   - **Frontend**: React with TypeScript.
+   - **UI Components**: `react-select` for dropdowns, `ReactMarkdown` for rendering AI responses and user `shadcn-ui` for components
+   - **Backend Integration**: OpenAI API for generating AI responses and Supabase for authentication.
+   - **Apollo Client**: for connecting to GraphQL
+
+2. **State Management**:
+   - Leveraged Zustand for global state management to handle authentication, country data user data.
+
+3. **API Integration**:
+   - API calls are abstracted into a utility function (`getInfoCountry`) to ensure clean separation of concerns.
+
+4. **Responsive Design**:
+   - The layout is optimized for both desktop and mobile users.
+
+5. **Button Interaction Control**:
+   - Buttons for AI actions are only clickable after a country is selected, ensuring logical user flow.
+
+---
+
+## Future Improvements
+
+1. **Improved UI/UX**:
+   - Implement animations and transitions for smoother interactions.
+   - Provide better error feedback for invalid API calls or user inputs.
+   - Improve the web design
+
+2. **Multilingual Support**:
+   - Expand translation capabilities to include support for multiple languages.
+
+3. **Chat History Persistence**:
+   - Save user chat interactions to Supabase for future retrieval and analysis.
+
+4. **Performance Optimization**:
+   - Cache API responses to reduce redundant requests and improve application speed.
+
+
