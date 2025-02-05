@@ -32,7 +32,15 @@ export const useChatPage = () => {
         ]);
         setInput("");
       } catch (error) {
-        console.log(error);
+        console.error("Error from AI assistant:", error);
+        setMessages((prev) => [
+          ...prev,
+          {
+            content:
+              "Maaf, saya mengalami kesalahan saat memproses permintaan Anda. Silakan coba lagi nanti.",
+            role: "assistant",
+          },
+        ])
       } finally {
         setLoading(false);
       }
