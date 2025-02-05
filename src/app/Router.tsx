@@ -4,7 +4,7 @@ import { DetailPage } from "@/features/detail-page/DetailPage"
 import { HomePage } from "@/features/home-page/HomePage"
 import { ProfilePage } from "@/features/profile-page/ProfilePage"
 import { AuthMiddleware } from "@/middleware/AuthMiddleware"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 
 export const AppRouter = () => {
   return (
@@ -13,6 +13,7 @@ export const AppRouter = () => {
         <Route path="/login" element={<Login/>} />
 
         <Route element={<AuthMiddleware/>}>
+          <Route path="/" element={<Navigate to="/trevo" replace />} /> 
           <Route path="/trevo" element={<HomePage/>} />
           <Route path="/trevo/detail/:code" element={<DetailPage/>} />
           <Route path="/trevo/chat-ai" element={<ChatPage/>} />
